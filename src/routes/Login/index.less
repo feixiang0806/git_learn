@@ -1,0 +1,34 @@
+.login_container{
+    width: 100%;
+    height: 100%;
+    background: url(../../assets/login_bg.jpg) no-repeat;
+    background-size: cover;
+    padding-top: 262px;
+    .login_content{
+        width: 711px;
+        height: 555px;
+    }
+    .login_method{
+        text-align: center;
+        &_a{
+            display: inline-block;
+            width: 426px;
+            height:64px;
+            line-height: 64px;
+            border:1px solid #d48c5f;
+            text-align: center;
+            font-size: 25px;
+            color: #bf2e15; 
+        }
+      
+    }
+    :global{
+        .form_item_label,.am-list-item .am-input-label, .am-list-item .am-input-control .fake-input-container .fake-input{
+            color:#74422b;
+            font-size:32px;
+        }
+        .am-list-item .am-input-control input{
+            font-size: 42px;
+          }
+    }
+}

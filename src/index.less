@@ -1,4 +1,83 @@
 :global {
+
+  #root, body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: none;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    max-width:750px;
+    margin:0 auto;
+    .am-modal-content{
+      padding-top: 0;
+      background: #eed8ae url(./assets/pop_bg.png)  no-repeat center bottom;
+      background-size: 100% auto;
+      border:9px solid #a4663d;
+      border-radius: 18px;
+      overflow: visible;
+    }
+    .am-modal-transparent .am-modal-content{
+      padding:0;
+    }
+    .am-modal-header{
+        width:100%;
+        height: 90px;
+        background: #f7edd1;   
+        text-align: center;
+        padding:0;
+    }
+    .am-modal-title{
+        height: 100%;
+        color: #1b3715;
+        line-height: 90px;
+        font-size: 40px;
+    }
+    .am-modal-transparent .am-modal-content .am-modal-body{
+      padding-bottom: 0;
+    }
+    .am-modal-button-group-h {
+      border-top: 1PX solid #c0936e;
+   }
+   .am-modal-button-group-h .am-modal-button:last-child{
+    border-left: 1PX solid #c0936e;
+   }
+   .am-modal-button-group-h .am-modal-button:first-child{
+      color: #1b3715;
+   }
+   .am-modal-button-group-h .am-modal-button{
+      color: #74422b;
+   }
+   .am-modal-close{
+    width: 53px;
+    height:54px;
+    right: -27px;
+    top: -27px;
+  }
+   .am-modal-close-x{
+     display: inline-block;
+     width: 100%;
+     height:100%;
+     background: url(./assets/close.png) no-repeat center;
+     background-size: cover;
+   }
+   .am-list-body{
+     background: transparent;
+   }
+   .am-modal-footer{
+     margin-top: 30px;
+   }
+   .am-tabs-default-bar-top .am-tabs-default-bar-content, .am-tabs-default-bar-bottom .am-tabs-default-bar-content{
+    flex:0;
+   } 
+   }
+   .container{
+    width:100%;
+    height: 100%;
+  }
+  
   .fn-clear {
     *zoom: 1;
   }
@@ -71,16 +150,155 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  .btn_1,.btn_2,.btn_3,.btn_4,.btn_5{
+    display: inline-block;
+    min-width: 211px;
+    height: 68px;
+    line-height: 68px;
+    color:#fff;
+    text-align: center;
+    font-size: 32px;
+    padding:0 36px;
+    border:none;
+    text-align: center;
+    border-radius: 34px;
   }
-
-  #root, body, html {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    -webkit-text-size-adjust: none;
+  .btn_1,.btn_4{
+    background:url(./assets/btn1.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .btn_2,.btn_5{
+      background:url(./assets/btn2.png) no-repeat;
+      background-size: 100% 100%;
+  }
+  .btn_3{
+    width: 413px;
+    height: 81px;
+    font-size: 38px;
+    background:url(./assets/btn3.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .pop_box{
+    width: 728px;
+    margin: 0 auto;
+    background: #eed8ae url(./assets/pop_bg.png)  no-repeat center bottom;
+    background-size: 100% auto;
+    border:9px solid #a4663d;
+    border-radius: 18px;
+   }
+   .pop_title{
+     width: 100%;
+     height: 117px;
+     padding:0;
+     &_h{
+         width: 100%;
+         height: 100%;
+         background: #f7edd1;
+         border-top-left-radius: 9px;
+         border-top-right-radius: 9px;
+         font-size: 50px;
+         color:#1b3715;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+     }
+   }
+   .form {
+       .form_item{
+         display: flex;
+         width: 100%;
+         align-items: center;
+         margin-bottom:28px;
+       }
+       .form_item_label, .am-list-item .am-input-label{
+         display: inline-block;
+         width:30%;
+         padding:0;
+         color:#1b3715;
+         font-size: 28px;
+       }
+       .am-list-item{
+         background: transparent;
+         min-height: 73px;
+         flex:1;
+       }
+       .am-list-item.am-input-item{
+         height: 73px;
+         padding: 0;
+       }
+       .am-list-item .am-list-line{
+         border:1px solid #c0936e;
+         background: #f7edd1;
+         padding:0 16px;
+       }
+       .am-list-item:not(:last-child) .am-list-line{
+         border-bottom:1px solid #c0936e;
+       }
+       .am-list-item .am-input-control input{
+         font-size: 32px;
+       }
+       .errors{
+         height: 28px;
+         line-height: 28px;
+         color:red;
+         text-align: left;
+         font-size: 16px;
+         padding-left: 30%;
+         margin-top: -28px;
+       }
+   }
+   .table_row{
+    border: 1px solid rgba(139,85,51,0.18);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size:24px;
+    color:#b59679;
+    &_top{
+      width: 100%;
+      height: 46px;
+      padding:20px 20px 20px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f7edd1;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    } 
+    &_bottom{
+      background: #f5e7bf;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      padding:10px 20px 10px 15px;
+      &_row, &_row_1{
+        width: 100%;
+        display: flex;
+        justify-content:space-between;
+        flex-grow: 1;
+        align-items: flex-end;
+      }
+      &_row_1{
+        margin-top: 25px;
+      }
+      &_row_1>div{
+        flex:1;
+      }
+    }
+    &_data1{
+      font-size:26px;
+      color:#1b3715;
+      margin-left:6px;
+    }
+    &_data2{
+      font-size:30px;
+      color:#bf2e15;
+      margin-left:6px;
+    }
+    &_label{
+      color:#74422b;
+    }
+    &_label1{
+      color:#74422b;
+      font-size:26px;
+    }
   }
 }

@@ -1,29 +1,8 @@
 import fetch from 'dva/fetch';
-import { notification, message } from 'antd';
-import store from 'store';
+import { Toast} from 'antd-mobile';
+import { getUrl } from './util'
 
-export function getApiUrl() {
-  let apiUrl = '';
-  const env = process.env.NODE_ENV;
-  switch (env) {
-    case 'dev':
-    case 'staging':
-      apiUrl = '';
-      break;
-    case 'preProduction':
-      apiUrl = '';
-      break;
-    case 'production':
-      apiUrl = 's';
-      break;
-    default:
-      break;
-  }
-  return apiUrl;
-};
-
-const URL = getApiUrl();
-
+const URL = getUrl().apiUrl;
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -49,8 +28,8 @@ export default function request(url, options) {
   const defaultOptions = {
     // credentials: 'include',
     headers: {
-      token: store.get('adminToken'),
-      'app-version': 'web:1.0.0',
+      // token: getSessionStore('userToken'),
+      // 'app-version': 'web:1.0.0',
     },
   };
 
@@ -66,7 +45,6 @@ export default function request(url, options) {
     newOptions.headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
-
       ...newOptions.headers,
     };
     newOptions.body = JSON.stringify(newOptions.body);
@@ -77,16 +55,10 @@ export default function request(url, options) {
     .then(response => response.json())
     .catch((error) => {
       if (error.code) {
-        notification.error({
-          message: error.name,
-          description: error.message,
-        });
+        Toast.info(error.message, 5, null, false);
       }
       if ('stack' in error && 'message' in error) {
-        notification.error({
-          message: `请求错误: ${url}`,
-          description: error.message,
-        });
+        Toast.info(error.message, 5, null, false);
       }
       return false;
     });
