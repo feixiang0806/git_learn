@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Modal, WhiteSpace } from 'antd-mobile';
-export const confirm = (props) =>{
+const confirm = (props) =>{
   const {visible, onClose,title,desc, onConfirm}  = props;
      return  (
         <Modal
@@ -20,3 +20,4 @@ export const confirm = (props) =>{
      </Modal>
      )
 }
+export default confirm;

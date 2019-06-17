@@ -20,7 +20,7 @@ export const getNavData = app => [
           },
           {
             path: 'home',
-            name: '大厅',
+            name: '首页',
             component: dynamicWrapper(app, ['home'], () => import('../routes/Home')),
             auth: true,
             exact: true,
