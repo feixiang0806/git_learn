@@ -83,7 +83,7 @@ export default class Home extends React.Component{
                         <a className='btn_3'>代理充值记录</a>
                     </div>
                     <div className={styles.btn_box}>
-                        <a className='btn_3'>提现外理</a>
+                        <a className='btn_3'>提现处理</a>
                         <a className='btn_3'>提现记录</a>
                         <a className='btn_3'>佣金记录</a>
                     </div>

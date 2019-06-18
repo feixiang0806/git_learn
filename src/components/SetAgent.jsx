@@ -22,12 +22,12 @@ const AgentModal = createForm()((props) => {
             //console.log(error)
           }
           else{
-            onConfirm(value.other)
+            onConfirm(value.other, form)
         }
         })
       } }]}
     >
-      <div className={`modal_form form`} >  
+      <div className={`modal_form form `} >  
         <div className='form_item'>
           <label className='form_item_label'>用户ID</label>
           <InputItem
@@ -52,17 +52,19 @@ class SetAgent extends React.Component{
       super();
       this.state = {
         confirmVisible: false,
-        other:''
+        other:'',
+        form: null
       }
     }
     toSetAgent = () =>{
-      const { dispatch } = this.props;
+      const { dispatch, onClose } = this.props;
       this.onConfirmClose()
-      dispatch({type:"agent/toSetAgent",payload:{
-        other:this.state.other,
+      dispatch({type:"home/toSetAgent",payload:{
+        other:parseInt(this.state.other),
       },
       callBack:() =>{
         onClose(); 
+        this.state.form.resetFields();
       }
       });
     }
@@ -71,8 +73,8 @@ class SetAgent extends React.Component{
       this.setState({confirmVisible: false});
     }
 
-    onConfirm = (other) =>{
-      this.setState({confirmVisible: true, other: other});
+    onConfirm = (other, form) =>{
+      this.setState({confirmVisible: true, other: other, form});
     }
 
    render(){

@@ -2,7 +2,7 @@
 import { Toast} from 'antd-mobile';
 import { ret, toastTime } from '../common/constants'
 import { createSignatureRequest } from '../utils/util';
-import { setAgent, charge, queryToChargeRecords } from '../services/agent';
+import { charge, queryToChargeRecords } from '../services/agent';
 
 export default {
   namespace: 'agent',
@@ -15,17 +15,7 @@ export default {
     }
   },
 
-  effects: {
-    *toSetAgent({ payload, callBack }, { call, put }) {
-        let request = createSignatureRequest(payload);
-        const response = yield call(setAgent, request);
-        if(response.ret == ret.ok){
-            Toast.info('设置代理成功！', toastTime, null, false);
-            if(callBack){
-                callBack();
-            }
-        }
-    },
+  effects: {  
     *getToChargeRecord({ payload }, { call, put }) {
         payload = {
             rows: 10,
