@@ -1,6 +1,6 @@
 import { createSignatureRequest } from '../utils/util';
 import { ret, toastTime } from '../common/constants'
-import { queryToChargeRecords } from '../services/record';
+import { querySendRecords } from '../services/record';
 export default {
     namespace: 'giveCoins',
     state: {
@@ -22,7 +22,7 @@ export default {
                 room_no: "062045"
             }
             let request = createSignatureRequest(payload);
-           const response = yield call(queryToChargeRecords, request);
+           const response = yield call(querySendRecords, request);
            if(response.ret == ret.ok){
                 yield put({
                     type: 'save',

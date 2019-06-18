@@ -22,21 +22,21 @@ class Login extends React.Component{
   }
 
   componentWillMount(){
-    const { location, dispatch } = this.props;
-    let paths = location.pathname.split('/');
-    let payload = {}
-    if(paths.length === 3){
-      payload.inviteCode = paths[2];
-      dispatch({type:'login/saveInviteInfo',payLoad:payload});
-    }
-    else if(paths.length === 4){
-      payload.inviteCode = paths[2];
-      payload.inviteRoomNo = paths[3];
-      dispatch({type:'login/saveInviteInfo',payLoad:payload});
-    }
-    if(payload.inviteCode){
-      this.setState({inviteCode:payload.inviteCode});
-    }
+    // const { location, dispatch } = this.props;
+    // let paths = location.pathname.split('/');
+    // let payload = {}
+    // if(paths.length === 3){
+    //   payload.inviteCode = paths[2];
+    //   dispatch({type:'login/save',payLoad:payload});
+    // }
+    // else if(paths.length === 4){
+    //   payload.inviteCode = paths[2];
+    //   payload.inviteRoomNo = paths[3];
+    //   dispatch({type:'login/save',payLoad:payload});
+    // }
+    // if(payload.inviteCode){
+    //   this.setState({inviteCode:payload.inviteCode});
+    // }
   }
 
   changeLoginType(type){

@@ -10,18 +10,17 @@ export default class Home extends React.Component{
             setAgentModal: false
         }
     }
-
     onClose = (type) => () =>{
         this.setState({[type]: false})
     }
-    toBack(){
-
-    }
+    loginOut = () => {
+        this.props.dispatch({type:'login/loginOut'});
+      }
     render(){
         return (
             <div className={`${styles.home_container}`}>
                 <div className={styles.top_box}>
-                    <a className={styles.top_box_btn} onClick={this.toBack}></a>
+                    <a className={styles.top_box_btn} onClick={this.loginOut}></a>
                      运营首页
                 </div>
                 <div className={`pop_box ${styles.home_content}`}>
@@ -79,8 +78,8 @@ export default class Home extends React.Component{
                         <a className='btn_3' onClick={() => {
                             this.setState({setAgentModal: true})
                         }}>设置代理</a>
-                        <a className='btn_3'>给代理充值</a>
-                        <a className='btn_3'>代理充值记录</a>
+                        <a className='btn_3' href='/charge'>给代理充值</a>
+                        <a className='btn_3'  href='/charge'>代理充值记录</a>
                     </div>
                     <div className={styles.btn_box}>
                         <a className='btn_3'>提现处理</a>

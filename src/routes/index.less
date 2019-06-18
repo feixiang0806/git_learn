@@ -1,30 +1,25 @@
-
-.normal {
-  font-family: Georgia, sans-serif;
-  text-align: center;
-  padding-top: 45px;
-}
-
-.title {
-  font-size: 32px;
-  font-weight: normal;
-  letter-spacing: -1px;
-}
-
-.welcome {
-  height: 328px;
-  background: url(../assets/yay.jpg) no-repeat center 0;
-  background-size: 388px 328px;
-}
-
-.list {
-  font-size: 22px;
-  margin-top: 30px;
-  list-style: none;
-  line-height: 32px;
-  padding: 0 20px;
-}
-
-.list code {
-  background: #f7f7f7;
+.form_box{
+  height: 778px;
+  .form_content{
+      padding:30px 55px;
+      &_tip{
+        font-size:18px;
+        color:#b59679;
+        margin-left: 10px;
+      }
+  }
+  :global{
+   .form_item_label{
+       width: 20%;
+   }   
+   .form .errors{
+       padding-left: 20%;
+   }
+   .form_item_label, .am-list-item .am-input-label{
+       font-size: 20px;
+   }
+   .am-list-item .am-input-control input{
+       font-size: 25px;
+     }
+  }
 }

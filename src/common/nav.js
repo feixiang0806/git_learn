@@ -25,6 +25,13 @@ export const getNavData = app => [
             auth: true,
             exact: true,
           },
+          {
+            path: 'charge',
+            name: '充币',
+            component: dynamicWrapper(app, ['charge'], () => import('../routes/ChargeCoins')),
+            auth: true,
+            exact: true,
+          },
         ]
     }
 ]

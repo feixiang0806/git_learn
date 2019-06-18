@@ -16,7 +16,6 @@ const confirm = (props) =>{
         <div className={`modal_form form`}>  
           { desc }
         </div> 
-        <WhiteSpace size="lg" />      
      </Modal>
      )
 }
