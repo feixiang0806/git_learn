@@ -1,6 +1,6 @@
 import { createSignatureRequest } from '../utils/util';
 import { ret, toastTime } from '../common/constants'
-import { querySendRecords } from '../services/record';
+import { queryGiveRecords } from '../services/record';
 export default {
     namespace: 'giveCoins',
     state: {
@@ -8,6 +8,7 @@ export default {
             list:[],
             pageSize:6,
             currentPage:0,
+            totalAmount:0
         },
         
     },
@@ -15,14 +16,9 @@ export default {
          
     },
     effects:{
-        *getGiveCoins({ payload }, { call, put }) {
-            payload = {
-                rows: 10,
-                page: 0,
-                room_no: "062045"
-            }
-            let request = createSignatureRequest(payload);
-           const response = yield call(querySendRecords, request);
+        *getGiveCoins({ payload }, { call, put }) {      
+          let request = createSignatureRequest(payload);
+           const response = yield call(queryGiveRecords, request);
            if(response.ret == ret.ok){
                 yield put({
                     type: 'save',
@@ -30,7 +26,8 @@ export default {
                         giveRecord: {
                             list: response.infos,
                             pageSize: payload.rows,
-                            currentPage: payload.page
+                            currentPage: payload.page,
+                            totalAmount: response.total
                          }
                     }
                 })
