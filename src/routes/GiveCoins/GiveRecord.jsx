@@ -38,9 +38,10 @@ export default class GiveRecord extends React.Component{
           type:'giveCoins/getGiveCoins', 
           payload:{
             rows: this.state.pageSize,
-            page: this.state.currentPage
+            page: this.state.currentPage,
+            recv:false
           }
-        });
+        });       
         this.setState({
             height: hei,
          });
@@ -73,6 +74,7 @@ export default class GiveRecord extends React.Component{
           payload:{
             rows: pageSize,
             page: ++currentPage,
+            recv:false
           }
         });
         this.setState({ isLoading: true, hasMore: true, currentPage: currentPage });
@@ -85,7 +87,7 @@ export default class GiveRecord extends React.Component{
                 <div className='table_row'>
                 <div className='table_row_top'>
                     <span>
-                    流水号<label className='table_row_data1'>{rowData.id||0 + rowID}</label>
+                    流水号<label className='table_row_data1'>{rowData.serial_no}</label>
                     </span>
                     <span className='text-right'>{formatUnixtTime(rowData.time)}</span>
                 </div>
@@ -93,11 +95,11 @@ export default class GiveRecord extends React.Component{
                     <div className='table_row_bottom_row'>   
                        <span>
                             <label className='table_row_label'>赠币数量</label>
-                            <label className='table_row_data2'>{rowData.amount|| 0+rowID}</label>
+                            <label className='table_row_data2'>{rowData.amount|| 0}</label>
                         </span>              
                         <span>
                             <label className='table_row_label'>收币人ID</label>
-                            <label className='table_row_data2'>{rowData.fee ||0+rowID}({'李四'})</label>
+                            <label className='table_row_data2'>{rowData.other_userid}({rowData.other_nickname})</label>
                         </span>                          
                     </div>
                 </div>
@@ -108,7 +110,7 @@ export default class GiveRecord extends React.Component{
         return (
          <div className={`pop_box ${styles.record_content}`}>
             <div className='desc_tip'>
-                赠币合计：50元
+                赠币合计：{this.props.giveRecord.totalAmount}元
             </div>
             <div className={styles.table_content}>
                 <ListView

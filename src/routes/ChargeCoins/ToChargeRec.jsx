@@ -37,7 +37,8 @@ export default class ToChargeRec extends React.Component{
           type:'charge/getToChargeRecord', 
           payload:{
             rows: this.state.pageSize,
-            page: this.state.currentPage
+            page: this.state.currentPage,
+            recv: false
           }
         });
         this.setState({
@@ -72,6 +73,7 @@ export default class ToChargeRec extends React.Component{
           payload:{
             rows: pageSize,
             page: ++currentPage,
+            recv: false
           }
         });
         this.setState({ isLoading: true, hasMore: true, currentPage: currentPage });
@@ -84,7 +86,7 @@ export default class ToChargeRec extends React.Component{
                 <div className='table_row'>
                 <div className='table_row_top'>
                     <span>
-                     流水号<label className='table_row_data1'>{rowData.id||0 + rowID}</label>
+                     流水号<label className='table_row_data1'>{rowData.serial_no}</label>
                     </span>
                     <span className='text-right'>{formatUnixtTime(rowData.time)}</span>
                 </div>
@@ -92,8 +94,12 @@ export default class ToChargeRec extends React.Component{
                     <div className='table_row_bottom_row'>
                         <span>
                             <label className='table_row_label'>数量</label>
-                            <label className='table_row_data2'>{rowData.amount|| 0+rowID}</label>
-                        </span>                    
+                            <label className='table_row_data2'>{rowData.amount}</label>
+                        </span>   
+                        <span>
+                            <label className='table_row_label'>收币人ID</label>
+                            <label className='table_row_data2'>{rowData.other_userid}</label>
+                        </span>                                           
                     </div>
                 </div>
             </div>  
@@ -103,7 +109,7 @@ export default class ToChargeRec extends React.Component{
         return (
          <div className={`pop_box ${styles.record_content}`}>
             <div className='desc_tip'>
-                充币合计：50元
+                充币合计：{this.props.toChargeRecord.totalAmount}元
             </div>
             <div className={styles.table_content}>
                 <ListView

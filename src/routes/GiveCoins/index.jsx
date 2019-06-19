@@ -14,7 +14,7 @@ class GiveCoins extends React.Component{
       
       render(){
         const { location, history } = this.props;
-        const tabs = [{title:'赠币记录',idx:0}];
+        const tabs = [{title:'赠币记录(送)',idx:0}];
         return (<Main location={location} history={history} title='赠币记录' >
             <div className={styles.record_container}>
                 <TabsComponent tabs={tabs}>
