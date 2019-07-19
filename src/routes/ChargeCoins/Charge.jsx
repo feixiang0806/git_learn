@@ -1,67 +1,73 @@
 import React from 'react';
-import { InputItem } from 'antd-mobile';
 import { connect } from 'dva';
 import { createForm } from 'rc-form';
 import styles  from '../index.less';
+import FormItemComp from '../../components/FormItemComp';
+import ChargeConfirm from '../../components/ChargeConfirm';
 @connect(state => {
   return {
   }
 })
 class Charge extends React.Component{
-
+    state ={
+      confirmVisible:false,
+      other:0,
+      coins:0
+    }
+    
     charge =() => {
-        const { dispatch, form} = this.props;
+        const {form} = this.props;
         form.validateFields((error, value) => {
           if(error){
            // console.log(error)
           }
           else{
-            dispatch({type:'charge/chargeCoins',payload:{
-              other: parseInt(value.other),
-              coins: parseInt(value.coins)
-            }});
+            this.setState({
+              confirmVisible: true,
+              other: value.other,
+              coins: value.coins
+            })          
           }
         });
+      }
+      
+      onClose=() =>{
+        this.setState({
+          confirmVisible: false
+        })    
       }
 
     render(){
         let errors;
         const { getFieldProps, getFieldError } = this.props.form;
+        const { confirmVisible, other, coins } = this.state;
         return <div className={`pop_box ${styles.form_box}`}>      
         <div className={`form ${styles.form_content}`}> 
-        <div className='form_item'>
-            <label className='form_item_label'>用户ID</label>
-            <InputItem
-            {...getFieldProps('other' ,{
+          <FormItemComp label='用户ID' isRequired {...getFieldProps('other' ,{
               onChange(){}, // have to write original onChange here if you need
               rules: [{required: true,message:'用户ID不能为空'}],
               })}
             placeholder="用户ID"
-            
-            clear
-            >
-           </InputItem>
-          </div>
+            clear/>
+
           {(errors = getFieldError('other')) ? <div className='errors'>{errors.join(',')}</div> : null}
-          <div className='form_item'>
-            <label className='form_item_label'>充币数量</label>
-            <InputItem
-            {...getFieldProps('coins' ,{
+          <FormItemComp label='充币数量' isRequired {...getFieldProps('coins' ,{
               onChange(){}, // have to write original onChange here if you need
-              rules: [{required: true,message:'充币数量不能为空'}],
+              rules: [
+                {required: true,message:'充币数量不能为空'},
+                {pattern: /^[1-9]\d*$/, message: '充币数量大于0'}
+              ],
               })}
             type='number'  
             placeholder="充币数量"
-            clear
-            >
-           </InputItem>
-          </div>
+            clear/>
           {(errors = getFieldError('coins')) ? <div className='errors'>{errors.join(',')}</div> : null}       
           <div className='form_item'>
             <label className='form_item_label'></label>
             <a onClick={this.charge} className='btn_1'>充币</a>
           </div>
         </div>
+        <ChargeConfirm visible={confirmVisible} onClose={this.onClose} userid={other} amount={coins} dispatch={this.props.dispatch}/>
       </div>
     }
 }

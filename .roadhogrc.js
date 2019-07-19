@@ -20,7 +20,7 @@ export default {
     '@hd': '2px'
   },
   extraPostCSSPlugins: [
-   PxToRem({ rootValue: 36, propWhiteList: [], })
+   PxToRem({ rootValue: 40, propWhiteList: [], })
   //  PxToViewport({
   //    viewportWidth:750,
   //    viewportHeight:1334,

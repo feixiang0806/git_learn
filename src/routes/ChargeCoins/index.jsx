@@ -14,12 +14,13 @@ import styles from '../record.less';
 class ChargeCoins extends React.Component{
       render(){
         const { location, history } = this.props;
-        const tabs = [{title:'充币',idx:0},{title:'充币记录',idx:1}];
+        //,{title:'充币记录',idx:1}
+        const tabs = [{title:'充币',idx:0}];
         return (<Main location={location} history={history} title='充币'>
             <div className={styles.record_container}>
                 <TabsComponent tabs={tabs}>
                   <Charge/>
-                  <ToChargeRec/>
+                  {/* <ToChargeRec/> */}
                 </TabsComponent>
             </div>
            

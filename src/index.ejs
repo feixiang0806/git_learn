@@ -14,20 +14,19 @@
   <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
   <link type="image/x-icon" rel="bookmark" href="/favicon.ico" /> -->
 
-  <title>dice admin</title>
+  <title>Dice Game</title>
 
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-
   <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-
+  <link rel="shortcut icon" href="" type="image/x-icon">
   <script src="//as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-  <script>
+   <script>
     function onResizeHandler(){
-      var fz = (document.documentElement.clientWidth ||  window.innerWidth)/750*36;
-      var style = 'font-size:'+ (fz > 36 ? 36:fz) + 'px';
+      var fz = (document.documentElement.clientWidth ||  window.innerWidth)/750*40;
+      var style = 'font-size:'+ (fz > 40 ? 40:fz) + 'px';
        document.getElementsByTagName('html')[0].style=style;
     
    }
@@ -44,9 +43,12 @@
       onResizeHandler();
     }, false);
     window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
-  </script>
+ </script>
 </head>
 <body>
   <div id="root"></div>
 </body>
+<script>
+  onResizeHandler();
+</script>
 </html>

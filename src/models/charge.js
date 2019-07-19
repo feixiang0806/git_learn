@@ -17,11 +17,6 @@ export default {
     },
     effects:{
         *getToChargeRecord({ payload }, { call, put }) {
-            payload = {
-                rows: 10,
-                page: 0,
-                room_no: "062045"
-            }
             let request = createSignatureRequest(payload);
            const response = yield call(queryChargeRecords, request);
            if(response.ret == ret.ok){

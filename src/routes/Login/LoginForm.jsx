@@ -1,6 +1,6 @@
 import React from 'react';
-import { InputItem } from 'antd-mobile';
 import { createForm } from 'rc-form';
+import FormItemComp from '../../components/FormItemComp';
 import {
   connect
 } from 'dva';
@@ -18,40 +18,29 @@ class LoginForm extends React.Component{
           }
           else{
             //login
-            value.userid = parseInt(value.userid);
-            dispatch({type:'login/regAndLogin',payload:value, dispatch: dispatch
+            dispatch({type:'login/userLogin',payload:value, dispatch: dispatch
            });
           }
         });
       }
+
       render(){
-    
         let errors;
         const { getFieldProps, getFieldError } = this.props.form;
         return (
           <div>
             <div className='pop_title'>
-                <div className='pop_title_h'>用户ID登录</div>
+                <div className='pop_title_h'>用户名登录</div>
             </div>
             <div className={`form ${styles.form_content}`}>
-              <div className='form_item'>
-                  <label className='form_item_label'>用户ID</label>
-                  <InputItem
-                  {...getFieldProps('userid' ,{
+              <FormItemComp label='用户名' isRequired {...getFieldProps('name' ,{
                     onChange(){}, // have to write original onChange here if you need
                     rules: [{required: true,message:'用户名不能为空'}],
                     })}
-                  type='number'  
-                  placeholder="用户ID"
-                  clear
-                 >
-                 </InputItem>
-              </div>
-              {(errors = getFieldError('userid')) ? <div className='errors'>{errors.join(',')}</div> : null}
-            <div className='form_item'>
-              <label className='form_item_label'>安全密码</label>
-              <InputItem
-              {...getFieldProps('password' ,{
+                  placeholder="用户名"
+                  clear/>
+              {(errors = getFieldError('name')) ? <div className='errors'>{errors.join(',')}</div> : null}
+              <FormItemComp label='安全密码' isRequired {...getFieldProps('password' ,{
                 onChange(){}, // have to write original onChange here if you need
                 rules: [
                   {required: true,message:'密码不能为空'},
@@ -60,10 +49,7 @@ class LoginForm extends React.Component{
                 })}
               type='password'  
               placeholder="安全密码"
-              clear
-              >
-              </InputItem>  
-            </div>  
+              clear/>
             {(errors = getFieldError('password')) ? <div className='errors'>{errors.join(',')}</div> : null}       
             <div className='form_item'>
               <label className='form_item_label'></label>

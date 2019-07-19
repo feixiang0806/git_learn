@@ -1,7 +1,6 @@
 import createHmac from 'create-hmac';
 import moment from 'moment';
 import { getSessionStore} from './storage';
-import { betType } from '../common/constants';
 export function getUrl() {
     let obj = {apiUrl:'', wsUrl:''};
     const env = process.env.NODE_ENV;
@@ -9,11 +8,11 @@ export function getUrl() {
     switch (env) {
       case 'dev':          
         obj.apiUrl = 'http://117.48.201.173:21356';
-        obj.wsUrl = 'ws://117.48.201.173:21356/ws';
+        obj.wsUrl = 'ws://117.48.201.173:21356/ws';     
         break;
       case 'production':
-        obj.apiUrl = 'http://117.48.201.173:21356';
-        obj.wsUrl = 'ws://117.48.201.173:21356/ws';
+        obj.apiUrl = 'https://b561.cc:21356';
+        obj.wsUrl = 'wss://b561.cc:21356/ws';
         break;
       default:
         break;

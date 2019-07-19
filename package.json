@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "roadhog build",
+    "build:dev": "NODE_ENV=dev roadhog build",
+    "build": "NODE_ENV=production roadhog build",
     "precommit": "npm run lint",
     "lint": "eslint --ext .js src test",
     "start": "BROWSER=none roadhog server",

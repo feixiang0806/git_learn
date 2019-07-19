@@ -19,9 +19,9 @@ export default {
   },
 
   effects: {
-    *regAndLogin({ payload }, { call, put}) {  // eslint-disable-line
+    *userLogin({ payload }, { call, put}) {  // eslint-disable-line
         payload.timestamp = parseInt(new Date().getTime() / 1000);
-        payload.nonce = parseInt(Math.random()*100);
+        payload.nonce = parseInt(Math.random()*10000);
         const response = yield call(login,payload);
       if(response.ret===ret.ok){
         yield put({type:'save',payload: {
