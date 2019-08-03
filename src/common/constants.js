@@ -17,4 +17,9 @@ export const loginType = {
   login: 2,
 };
 
+export const userType =  {
+  user:0,
+  operation:1,
+  agent:2
+}
 export const toastTime = 3;

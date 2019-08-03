@@ -1,6 +1,6 @@
 import { createSignatureRequest } from '../utils/util';
 import { ret, toastTime } from '../common/constants'
-import { queryGiveRecords } from '../services/record';
+import { queryGiveRecords } from '../services/user';
 export default {
     namespace: 'giveCoins',
     state: {

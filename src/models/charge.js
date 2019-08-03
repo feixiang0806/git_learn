@@ -1,7 +1,7 @@
 import { createSignatureRequest } from '../utils/util';
 import { Toast } from 'antd-mobile';
 import { ret, toastTime } from '../common/constants'
-import { queryChargeRecords, charge } from '../services/record';
+import { charge,queryToChargeRecords} from '../services/admin';
 export default {
     namespace: 'charge',
     state: {
@@ -18,7 +18,7 @@ export default {
     effects:{
         *getToChargeRecord({ payload }, { call, put }) {
             let request = createSignatureRequest(payload);
-           const response = yield call(queryChargeRecords, request);
+           const response = yield call(queryToChargeRecords, request);
            if(response.ret == ret.ok){
                 yield put({
                     type: 'save',

@@ -2,7 +2,7 @@ import { Toast} from 'antd-mobile';
 import { routerRedux } from 'dva/router';
 import { ret, toastTime } from '../common/constants';
 import { createSignatureRequest } from '../utils/util';
-import { setAgent } from '../services/agent';
+import { setAgent,setOperation } from '../services/admin';
 
 export default {
   namespace: 'home',
@@ -31,6 +31,20 @@ export default {
     }
 
   },
+  *toSetOperation({ payload, callBack }, { call, put }) {
+    let request = createSignatureRequest(payload);
+    const response = yield call(setOperation, request);
+    if(response.ret == ret.ok){
+        Toast.info('设置运营成功！', toastTime, null, false);
+        if(callBack){
+            callBack();
+        }
+    }
+    else{
+      yield put({type:'global/showErrorMessage',payload:{ret:response.ret,msg:response.msg}})
+  }
+
+},
    
 },
 

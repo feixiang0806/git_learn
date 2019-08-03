@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './index.less';
-import SetAgent from '../../components/SetAgent';
+import SetUserType from '../../components/SetUserType';
+import { userType } from '../../common/constants';
 @connect()
 export default class Home extends React.Component{
     constructor(props){
         super();
         this.state ={
-            setAgentModal: false
+            setUserTypeModal: false,
+            utype:0
         }
     }
     onClose = (type) => () =>{
@@ -24,7 +26,7 @@ export default class Home extends React.Component{
                      运营首页
                 </div>
                 <div className={`pop_box ${styles.home_content}`}>
-                    <div className={styles.table_box}>
+                    {/* <div className={styles.table_box}>
                         <div className={styles.row}>
                             <div className={styles.row_col}>
                                用户数：<label className={styles.row_data}>1000个</label>
@@ -73,41 +75,45 @@ export default class Home extends React.Component{
                                提现数：<label className={styles.row_data}>1000元</label>
                             </div>
                         </div>
+                    </div> */}
+                     <div className={styles.btn_box}>
+                        <a className='btn_3' onClick={() => {
+                            this.setState({setUserTypeModal: true,utype:userType.operation})
+                        }}>设置运营</a>
+                        <a className='btn_3' href='/operation_query'>运营查询</a>
+                        <a className='btn_3' href='/user_query'>用户查询</a>
+                        {/* <a className='btn_3'>赠币记录</a> */}
                     </div>
                     <div className={styles.btn_box}>
                         <a className='btn_3' onClick={() => {
-                            this.setState({setAgentModal: true})
+                            this.setState({setUserTypeModal: true,utype:userType.agent})
                         }}>设置代理</a>
+                        <a className='btn_3' href='/agent_query'>代理查询</a>
                         <a className='btn_3' href='/charge'>给代理充值</a>
-                        <a className='btn_3'  href='/charge'>代理充值记录</a>
+                        {/* <a className='btn_3'  href='/charge'>代理充值记录</a> */}
                     </div>
-                    <div className={styles.btn_box}>
+                    {/* <div className={styles.btn_box}>
                         <a className='btn_3'>提现处理</a>
                         <a className='btn_3'>提现记录</a>
                         <a className='btn_3'>佣金记录</a>
-                    </div>
-                    <div className={styles.btn_box}>
-                        <a className='btn_3'>用户查询</a>
-                        <a className='btn_3'>用户充值记录</a>
-                        <a className='btn_3'>赠币记录</a>
-                    </div>
-                    <div className={styles.btn_box}>
+                    </div> */}
+                    {/* <div className={styles.btn_box}>
                         <a className='btn_3'>房间查询</a>
                         <a className='btn_3'>开局记录</a>
                         <a className='btn_3'>押注记录</a>
-                    </div>
-                    <div className={styles.btn_box}>
+                    </div> */}
+                    {/* <div className={styles.btn_box}>
                         <a className='btn_3'>中奖记录</a>
                         <a className='btn_3'>公告发布</a>
                         <a className='btn_3'>公告记录</a>
-                    </div>
-                    <div className={styles.btn_box}>
+                    </div> */}
+                    {/* <div className={styles.btn_box}>
                         <a className='btn_3'>运营设置</a>
                         <a className='btn_3'>运营查询</a>
                         <a className='btn_3'>业绩统计</a>
-                    </div>
+                    </div> */}
                 </div>
-                <SetAgent visible={this.state.setAgentModal}  onClose={this.onClose('setAgentModal')} dispatch={this.props.dispatch}/>
+                <SetUserType visible={this.state.setUserTypeModal}  onClose={this.onClose('setUserTypeModal')} dispatch={this.props.dispatch} type={this.state.utype}/>
             </div>
         )
     }

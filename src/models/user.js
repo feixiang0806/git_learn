@@ -1,29 +1,32 @@
 import { createSignatureRequest } from '../utils/util';
 import { Toast } from 'antd-mobile';
 import { ret, toastTime } from '../common/constants'
-import { queryAgentList} from '../services/admin';
+import { queryUsers} from '../services/admin';
 export default {
-    namespace: 'agent',
+    namespace: 'user',
     state: {
-        agents:{
+        users:{
             list:[],
             pageSize:6,
-            currentPage:0
+            currentPage:0,
+            totalAmount:0
           }
     },
     subscriptions: {
          
     },
     effects:{
-        *getAgents({ payload }, { call, put }) {
+        *getUsers({ payload }, { call, put }) {
+            console.log(payload)
+
            let request = createSignatureRequest(payload);
-           const response = yield call(queryAgentList, request);
+           const response = yield call(queryUsers, request);
            if(response.ret == ret.ok){
                 yield put({
                     type: 'save',
                     payload: {
-                        agents: {
-                            list: response.infos,
+                        users: {
+                            list: [response.info],
                             pageSize: payload.rows,
                             currentPage: payload.page,
                          }
