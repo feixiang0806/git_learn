@@ -326,4 +326,29 @@
   .modal_form{
     margin-top: 30px;
   }
+  .my-radio {
+    color:#b59679;
+    .am-radio {
+    width: 36px;
+    height: 36px;
+    padding: 2.5px;
+    border: 1px solid #915531;
+    border-radius: 50%;
+    margin-right: 5px;
+   }
+   .am-radio-inner{
+     width: 100%;
+     height:100%;
+     top:0;
+   }
+   .am-radio.am-radio-checked .am-radio-inner {
+    border-width: 0;
+    background: #915531;
+    border-radius: 50%;
+   }
+   .am-radio.am-radio-checked .am-radio-inner:after{
+    border-color: #915531;
+    display: none;
+   }
+  }
 }

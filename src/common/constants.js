@@ -20,6 +20,7 @@ export const loginType = {
 export const userType =  {
   user:0,
   operation:1,
-  agent:2
+  agent:2,
+  super_agent:3
 }
 export const toastTime = 3;

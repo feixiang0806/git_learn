@@ -1,14 +1,15 @@
 
-import React from 'react';
-import { Modal,InputItem } from 'antd-mobile';
+import React,{useState} from 'react';
+import { Modal, Checkbox } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import Confirm from './Confirm';
 import FormItemComp from './FormItemComp';
 import { userType } from '../common/constants';
 
 const AgentModal = createForm()((props) => {
-  const {visible, onClose, onConfirm, form,title }  = props;
+  const {visible, onClose, onConfirm, form,title,type }  = props;
   const { getFieldProps, getFieldError } = form;
+  const [ isSuper, setIsSuper ] = useState(false);
   let errors;
   return(
       <Modal
@@ -24,7 +25,7 @@ const AgentModal = createForm()((props) => {
             //console.log(error)
           }
           else{
-            onConfirm(value.other, form)
+            onConfirm(value.other,isSuper ? userType.super_agent : userType.agent, form)
         }
         })
       } }]}
@@ -37,6 +38,10 @@ const AgentModal = createForm()((props) => {
             type='number'  
             clear/> 
           {(errors = getFieldError('other')) ? <div className='errors'>{errors.join(',')}</div> : null}
+          {type=== userType.agent &&  <div className='form_item'>
+                <label className='form_item_label'>超级代理</label>
+                <Checkbox key={`agent_${userType.super_agent}`} className="my-radio" onChange={e => setIsSuper(!isSuper)}></Checkbox>
+                </div>}
       </div>       
     </Modal>
   )
@@ -48,13 +53,16 @@ class SetUserType extends React.Component{
       this.state = {
         confirmVisible: false,
         other:'',
+        uType:'',
         form: null
       }
     }
     toSetUsertype = () =>{
       const { dispatch, onClose,type} = this.props;
       this.onConfirmClose();
-      let url = null;
+      let url = null, payload ={
+      other:parseInt(this.state.other)
+     };
       switch(type){
         case userType.operation:{
           url = "home/toSetOperation";
@@ -62,13 +70,12 @@ class SetUserType extends React.Component{
         }
         case userType.agent:{
           url = "home/toSetAgent";
+          payload.type = parseInt(this.state.uType);
           break;
         }
       }
       if(url){
-        dispatch({type:url,payload:{
-          other:parseInt(this.state.other),
-        },
+        dispatch({type:url,payload:payload,
         callBack:() =>{
           onClose(); 
           this.state.form.resetFields();
@@ -81,8 +88,8 @@ class SetUserType extends React.Component{
       this.setState({confirmVisible: false});
     }
 
-    onConfirm = (other, form) =>{
-      this.setState({confirmVisible: true, other: other, form});
+    onConfirm = (other, uType,form) =>{
+      this.setState({confirmVisible: true, other, uType,  form});
     }
 
    render(){
