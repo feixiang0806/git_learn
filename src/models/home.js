@@ -1,5 +1,4 @@
 import { Toast} from 'antd-mobile';
-import { routerRedux } from 'dva/router';
 import { ret, toastTime } from '../common/constants';
 import { createSignatureRequest } from '../utils/util';
 import { setAgent,setOperation } from '../services/admin';
@@ -7,7 +6,7 @@ import { setAgent,setOperation } from '../services/admin';
 export default {
   namespace: 'home',
   state: {
-   
+    overview:{}
   },
 
   subscriptions: {

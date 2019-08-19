@@ -37,7 +37,6 @@ export default class AgentList extends React.Component{
         payload:{
           rows: this.state.pageSize,
           page: this.state.currentPage,
-          recv: false
         }
       });
       this.setState({
@@ -72,7 +71,6 @@ export default class AgentList extends React.Component{
         payload:{
           rows: pageSize,
           page: ++currentPage,
-          recv: false
         }
       });
       this.setState({ isLoading: true, hasMore: true, currentPage: currentPage });

@@ -3,7 +3,11 @@ import { connect } from 'dva';
 import styles from './index.less';
 import SetUserType from '../../components/SetUserType';
 import { userType } from '../../common/constants';
-@connect()
+@connect(state => {
+   return  {
+    overview:state.home.overview
+    }
+})
 export default class Home extends React.Component{
     constructor(props){
         super();
@@ -12,6 +16,7 @@ export default class Home extends React.Component{
             utype:0
         }
     }
+    
     onClose = (type) => () =>{
         this.setState({[type]: false})
     }
@@ -19,6 +24,7 @@ export default class Home extends React.Component{
         this.props.dispatch({type:'login/loginOut'});
       }
     render(){
+        const { overview } = this.props;
         return (
             <div className={`${styles.home_container}`}>
                 <div className={styles.top_box}>
@@ -26,56 +32,45 @@ export default class Home extends React.Component{
                      运营首页
                 </div>
                 <div className={`pop_box ${styles.home_content}`}>
-                    {/* <div className={styles.table_box}>
+                    <div className={styles.table_box}>
                         <div className={styles.row}>
                             <div className={styles.row_col}>
-                               用户数：<label className={styles.row_data}>1000个</label>
+                               用户数：<label className={styles.row_data}>{overview.user_count || 0}个</label>
                             </div>
                             <div className={styles.row_col}>
-                               充币数：<label className={styles.row_data}>1000个</label>
+                               登录数：<label className={styles.row_data}>{overview.session_count || 0}个</label>
                             </div>
                         </div>
                         <div className={`${styles.row} ${styles.row_even}`}>
                             <div className={styles.row_col}>
-                               代理数：<label className={styles.row_data}>1000个</label>
+                               在线数：<label className={styles.row_data}>{overview.online_count || 0}个</label>
                             </div>
                             <div className={styles.row_col}>
-                               应收款：<label className={styles.row_data}>1000元</label>
+                               房间数：<label className={styles.row_data}>{overview.room_count || 0}个</label>
                             </div>
                         </div>
                         <div className={styles.row}>
                             <div className={styles.row_col}>
-                               房间数：<label className={styles.row_data}>1000个</label>
+                               开局数：<label className={styles.row_data}>{overview.game_count || 0}局</label>
                             </div>
                             <div className={styles.row_col}>
-                               耗币数：<label className={styles.row_data}>1000个</label>
+                               耗币数：<label className={styles.row_data}>{overview.spent_coins || 0}个</label>
                             </div>
                         </div>
                         <div className={`${styles.row} ${styles.row_even}`}>
                             <div className={styles.row_col}>
-                               开局数：<label className={styles.row_data}>1000局</label>
+                               代理已收币：<label className={styles.row_data}>{overview.recv_coins || 0}个</label>
                             </div>
                             <div className={styles.row_col}>
-                               剩币数：<label className={styles.row_data}>1000个</label>
+                               代理已充币：<label className={styles.row_data}>{overview.charge_coins || 0}个</label>
                             </div>
                         </div>
                         <div className={styles.row}>
                             <div className={styles.row_col}>
-                               押注数：<label className={styles.row_data}>1000次</label>
-                            </div>
-                            <div className={styles.row_col}>
-                               奖金数：<label className={styles.row_data}>1000元</label>
-                            </div>
-                        </div>
-                        <div className={`${styles.row} ${styles.row_even}`}>
-                            <div className={styles.row_col}>
-                               佣金数：<label className={styles.row_data}>1000元</label>
-                            </div>
-                            <div className={styles.row_col}>
-                               提现数：<label className={styles.row_data}>1000元</label>
-                            </div>
-                        </div>
-                    </div> */}
+                               代理剩余币：<label className={styles.row_data}>{overview.remain_coins || 0}个</label>
+                            </div>                    
+                        </div>          
+                    </div>
                      <div className={styles.btn_box}>
                         <a className='btn_3' onClick={() => {
                             this.setState({setUserTypeModal: true,utype:userType.operation})
