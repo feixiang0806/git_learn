@@ -23,4 +23,10 @@ export const userType =  {
   agent:2,
   super_agent:3
 }
+export const userTypeLabel = {
+  0:'用户',
+  1:'运营',
+  2:'代理',
+  3:'超级代理'
+}
 export const toastTime = 3;

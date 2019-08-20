@@ -1,7 +1,7 @@
 import { Toast} from 'antd-mobile';
 import { ret, toastTime } from '../common/constants';
 import { createSignatureRequest } from '../utils/util';
-import { setAgent,setOperation } from '../services/admin';
+import { setAgent,setOperation,queryOverView } from '../services/admin';
 
 export default {
   namespace: 'home',
@@ -42,15 +42,25 @@ export default {
     else{
       yield put({type:'global/showErrorMessage',payload:{ret:response.ret,msg:response.msg}})
   }
-
 },
+*getOverView({payload},{call,put}){
+  let request = createSignatureRequest(payload);
+  const response = yield call(queryOverView, request);
+  if(response.ret == ret.ok){
+    let oview = Object.assign({},response);
+    delete oview.ret;
+    delete oview.msg;
+    yield put({type:'save',payload:{overview:oview}});
+  }
+  else{
+    yield put({type:'global/showErrorMessage',payload:{ret:response.ret,msg:response.msg}})
+  }
+}
    
 },
-
-  reducers: {
-    save(state, action) {
-      return {...state, ...action.payload};
-    }
+reducers: {
+  save(state, action) {
+    return {...state, ...action.payload};
   }
-
+}
 };

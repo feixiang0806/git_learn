@@ -53,6 +53,13 @@ export const getNavData = app => [
             auth: true,
             exact: true,
           },
+          {
+            path: 'receiveCoins',
+            name: '收币查询',
+            component: dynamicWrapper(app, ['receiveCoins'], () => import('../routes/ReceiveCoins')),
+            auth: true,
+            exact: true,
+          },
         ]
     }
 ]

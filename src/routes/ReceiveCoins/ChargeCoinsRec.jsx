@@ -4,14 +4,16 @@ import { ListView } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { connect } from 'dva';
 import FormItemComp from '../../components/FormItemComp';
+import { formatUnixtTime } from '../../utils/util';
+import { userTypeLabel } from '../../common/constants';
 import styles from '../record.less';
 
 @connect(state =>{
     return { 
-      users: state.user.users 
+      chargeCoins: state.recCoins.chargeCoins 
     }
 })
-class UserList extends React.Component{
+class ChargeCoins extends React.Component{
   constructor(props) {
       super(props);
       const dataSource = new ListView.DataSource({
@@ -40,10 +42,10 @@ class UserList extends React.Component{
     }
   
     componentWillReceiveProps(nextProps) {
-      if (nextProps.users !== this.props.users) {
+      if (nextProps.chargeCoins !== this.props.chargeCoins) {
         const { initData, pageSize } = this.state;
-        let iData = initData.concat(nextProps.users.list);
-        let hasMore = nextProps.users.list.length === pageSize
+        let iData = initData.concat(nextProps.chargeCoins.list);
+        let hasMore = nextProps.chargeCoins.list.length === pageSize
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(iData),
           isLoading: false,
@@ -70,7 +72,7 @@ class UserList extends React.Component{
             obj.name =value.name;
           }
           dispatch({ 
-            type:'user/getUsers', 
+            type:'recCoins/queryChargeCoins', 
             payload:obj
           });
           this.setState({ isLoading: true, hasMore: true, currentPage: 0,initData:[],dataSource:this.state.dataSource.cloneWithRows([]),formObj:{id:obj.id || '',name:obj.name || ''} });
@@ -86,7 +88,7 @@ class UserList extends React.Component{
       const { dispatch } = this.props;
       let { pageSize, currentPage,formObj } = this.state;
       dispatch({ 
-        type:'user/getUsers', 
+        type:'recCoins/queryChargeCoins', 
         payload:{
           rows: pageSize,
           page: ++currentPage,
@@ -103,29 +105,29 @@ class UserList extends React.Component{
               <div className='table_row'>
               <div className='table_row_top'>
                   <span>
-                    用户ID<label className='table_row_data1'>{rowData.userid}</label>
+                    用户ID<label className='table_row_data1'>{rowData.userid}({rowData.nickname})</label>
                   </span>
-                  <span className='text-right'>外号<label className='table_row_data1'>{rowData.nickname}</label></span>
+                  <span className='text-right'>用户类型<label className='table_row_data1'>{userTypeLabel[rowData.type]}</label></span>
               </div>
               <div className='table_row_bottom'>
                   <div className='table_row_bottom_row'>
                       <span>
-                          <label className='table_row_label'>己收币</label>
-                          <label className='table_row_data2'>{rowData.recv_coins}</label>
+                          <label className='table_row_label'>充币数量</label>
+                          <label className='table_row_data2'>{rowData.amount}</label>
                       </span>   
                       <span>
-                          <label className='table_row_label'>已充币</label>
-                          <label className='table_row_data2'>{rowData.charge_coins}</label>
+                          <label className='table_row_label'>充币时间</label>
+                          <label className='table_row_data2'>{formatUnixtTime(rowData.time)}</label>
                       </span>                                           
                   </div>
                   <div className='table_row_bottom_row'>
                       <span>
-                          <label className='table_row_label'>己用币</label>
-                          <label className='table_row_data2'>{rowData.game_coins}</label>
+                          <label className='table_row_label'>充币人ID</label>
+                          <label className='table_row_data2'>{rowData.other_userid}</label>
                       </span>   
                       <span>
-                          <label className='table_row_label'>剩余币</label>
-                          <label className='table_row_data2'>{rowData.remain_coins}</label>
+                          <label className='table_row_label'>充币人外号</label>
+                          <label className='table_row_data2'>{rowData.other_nickname}</label>
                       </span>                                           
                   </div>
               </div>
@@ -175,4 +177,4 @@ class UserList extends React.Component{
   }
 }
 
-export default createForm()(UserList);
+export default createForm()(ChargeCoins);

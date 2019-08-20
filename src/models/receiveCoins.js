@@ -1,29 +1,28 @@
 import { createSignatureRequest } from '../utils/util';
 import { ret } from '../common/constants'
-import { queryUsers} from '../services/admin';
+import { queryCharge} from '../services/admin';
 export default {
-    namespace: 'user',
+    namespace: 'recCoins',
     state: {
-        users:{
+        chargeCoins:{
             list:[],
             pageSize:6,
-            currentPage:0,
-            totalAmount:0
+            currentPage:0
           }
     },
     subscriptions: {
          
     },
     effects:{
-        *getUsers({ payload }, { call, put }) {
+        *queryChargeCoins({ payload }, { call, put }) {
            let request = createSignatureRequest(payload);
-           const response = yield call(queryUsers, request);
+           const response = yield call(queryCharge, request);
            if(response.ret == ret.ok){
                 yield put({
                     type: 'save',
                     payload: {
-                        users: {
-                            list: [response.info],
+                        chargeCoins: {
+                            list: response.infos || [],
                             pageSize: payload.rows,
                             currentPage: payload.page,
                          }
@@ -38,6 +37,7 @@ export default {
     },
     reducers: {
         save(state, action){
+            console.log(action)
             return {
                 ...state,
                 ...action.payload

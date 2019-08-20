@@ -47,3 +47,17 @@ export async function queryAdminList(payload) {
       body: payload
     });
   }
+
+  export async function queryOverView(payload) {
+    return request('/api/v1/admin/query_overview',{
+      method:"POST",
+      body: payload
+    });
+  }
+
+  export async function queryCharge(payload) {
+    return request('/api/v1/admin/query_charge',{
+      method:"POST",
+      body: payload
+    });
+  }

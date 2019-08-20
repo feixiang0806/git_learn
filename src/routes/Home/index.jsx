@@ -16,13 +16,20 @@ export default class Home extends React.Component{
             utype:0
         }
     }
+
+    componentWillMount(){
+        const { dispatch } = this.props;
+        dispatch({type:'home/getOverView'})
+    }
     
     onClose = (type) => () =>{
         this.setState({[type]: false})
     }
+
     loginOut = () => {
         this.props.dispatch({type:'login/loginOut'});
       }
+
     render(){
         const { overview } = this.props;
         return (
@@ -38,7 +45,7 @@ export default class Home extends React.Component{
                                用户数：<label className={styles.row_data}>{overview.user_count || 0}个</label>
                             </div>
                             <div className={styles.row_col}>
-                               登录数：<label className={styles.row_data}>{overview.session_count || 0}个</label>
+                               登录数：<label className={styles.row_data}>{overview.session_count || 0}次</label>
                             </div>
                         </div>
                         <div className={`${styles.row} ${styles.row_even}`}>
@@ -85,8 +92,10 @@ export default class Home extends React.Component{
                         }}>设置代理</a>
                         <a className='btn_3' href='/agent_query'>代理查询</a>
                         <a className='btn_3' href='/charge'>给代理充值</a>
-                        {/* <a className='btn_3'  href='/charge'>代理充值记录</a> */}
                     </div>
+                    <div className={styles.btn_box}>
+                        <a className='btn_3'  href='/receiveCoins'>充币查询</a>
+                   </div>
                     {/* <div className={styles.btn_box}>
                         <a className='btn_3'>提现处理</a>
                         <a className='btn_3'>提现记录</a>
