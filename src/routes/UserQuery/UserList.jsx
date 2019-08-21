@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ListView } from 'antd-mobile';
+import { ListView ,Toast} from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { connect } from 'dva';
 import FormItemComp from '../../components/FormItemComp';
@@ -59,21 +59,26 @@ class UserList extends React.Component{
         if(error){
         }
         else{
+          if(!value.id && !value.name){
+            Toast.info('请输入查询条件！', 2, null, false);
+            return;
+          }
           let obj = {
             rows: this.state.pageSize,
             page: 0,
-          };
+          },formObj = {};
           if(value.id){
-            obj.id = parseInt(value.id);
+            obj.id = formObj.id = parseInt(value.id);
+
           }
           if(value.name){
-            obj.name =value.name;
+            obj.name =formObj.name = value.name;
           }
           dispatch({ 
             type:'user/getUsers', 
             payload:obj
           });
-          this.setState({ isLoading: true, hasMore: true, currentPage: 0,initData:[],dataSource:this.state.dataSource.cloneWithRows([]),formObj:{id:obj.id || '',name:obj.name || ''} });
+          this.setState({ isLoading: true, hasMore: true, currentPage: 0,initData:[],dataSource:this.state.dataSource.cloneWithRows([]),formObj });
         }
       });
     }
