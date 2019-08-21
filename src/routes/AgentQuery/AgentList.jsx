@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ListView } from 'antd-mobile';
 import { connect } from 'dva';
+import { userTypeLabel } from '../../common/constants';
 import styles from '../record.less';
 
 @connect(state =>{
@@ -83,7 +84,7 @@ export default class AgentList extends React.Component{
               <div className='table_row'>
               <div className='table_row_top'>
                   <span>
-                    用户ID<label className='table_row_data1'>{rowData.userid}</label>
+                    用户ID<label className='table_row_data1'>{rowData.userid}({userTypeLabel[rowData.type]})</label>
                   </span>
                   <span className='text-right'>外号<label className='table_row_data1'>{rowData.nickname}</label></span>
               </div>
