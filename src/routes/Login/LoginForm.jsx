@@ -18,7 +18,7 @@ class LoginForm extends React.Component{
           }
           else{
             //login
-            dispatch({type:'login/userLogin',payload:value, dispatch: dispatch
+            dispatch({type:'login/userLogin',payload:{...value, is_admin:true}, dispatch: dispatch
            });
           }
         });
